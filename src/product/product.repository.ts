@@ -11,12 +11,10 @@ export class ProductRepository {
   }
 
   async findById(id: number): Promise<Product | null> {
-    return this.prisma.product.findUnique({
-      where: { id },
-    });
+    return this.prisma.product.findUnique({ where: { id } });
   }
 
-  async create(data: { name: string; category: string }): Promise<Product> {
+  async create(data: { name: string; category: string; area: string }): Promise<Product> {
     return this.prisma.product.create({ data });
   }
 }

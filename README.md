@@ -79,3 +79,80 @@ Rabbit operates multiple stores across the region, processing thousands of order
 ---
 
 Good luck with the challenge! We look forward to reviewing your submission.
+
+
+
+---
+
+## **Enhancements and New Features**
+
+### **New Method: `getTopOrderedProducts`**
+
+*   Developed an API to fetch the **top 10 ordered products**, filtered by area.  
+*   Includes detailed product information and aggregated order count.
+
+### **Enhanced `getAllProducts` API**
+
+*   Refactored to support **dynamic filtering** by `categories` and `area`.  
+*   Enhanced performance by eliminating unnecessary loops and adding order count to the response.
+
+### **Improved `getProductById` API**
+
+*   Added **validation** for product IDs and integrated error handling for invalid or non-existent IDs.  
+*   Included the **order count** in the response for enhanced product details.
+
+### **Database Integration**
+
+*   Set up and connected a **MySQL database** using the `DATABASE_URL` environment variable.  
+*   Ensured seamless integration and compatibility with Prisma ORM.
+
+---
+
+## **Testing Details**
+
+### **Unit Tests**
+
+*   Verified the **functionality of individual services** and repository methods.  
+*   Focused primarily on filtering and sorting logic.  
+*   **Result**: All unit tests passed successfully.
+
+### **Integration Tests**
+
+*   Tested API endpoints for **expected responses** under various scenarios:  
+    *   `/product` endpoint returned accurate data with filters applied.  
+    *   `/product/:id` endpoint successfully fetched the correct product by ID.  
+    *   `/product/top-ordered-products` endpoint failed during integration tests and requires further debugging.  
+*   **Result**: General endpoints passed integration tests, but `getTopOrderedProducts` requires further investigation.
+
+---
+
+## **Testing Steps**
+
+1.  **Run Prisma Commands**  
+    *   Generate the Prisma client:  
+        `yarn prisma:generate`
+        
+    *   Apply database schema changes via migrations:  
+        `yarn migrate:dev`
+        
+    *   Seed the database with test data:  
+        `yarn seed`
+
+2.  **Run Integration Tests**  
+    *   Execute the end-to-end (e2e) tests:  
+        `yarn test.e2e`
+
+---
+
+## **Known Issues**
+
+### **`getTopOrderedProducts` Integration Test Failure**
+
+*   While unit tests confirm the **correctness of the functionality**, the endpoint fails during integration tests.  
+*   Possible causes include:  
+    *   Missing a relation or any overwritr in the database.  
+    *   Runtime discrepancies in query execution or logic.  
+
+---
+
+Even if the issue isn’t resolved right away, I’ll keep working on fixing it. If I’m not accepted
